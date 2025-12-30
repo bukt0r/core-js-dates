@@ -225,7 +225,7 @@ function getNextFridayThe13th(date) {
   const result = new Date(date);
   result.setDate(result.getDate() + 1);
 
-  while (true) {
+  for (;;) {
     const year = result.getFullYear();
     const month = result.getMonth();
     const friday13 = new Date(year, month, 13);
@@ -233,6 +233,7 @@ function getNextFridayThe13th(date) {
     if (friday13 > result && friday13.getDay() === 5) {
       return friday13;
     }
+
     result.setMonth(month + 1, 1);
   }
 }
@@ -286,8 +287,9 @@ function getWorkSchedule(/* period, countWorkDays, countOffDays */) {
  * Date(2022, 2, 1) => false
  * Date(2020, 2, 1) => true
  */
-function isLeapYear(/* date */) {
-  throw new Error('Not implemented');
+function isLeapYear(date) {
+  const year = date.getFullYear();
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }
 
 module.exports = {
